@@ -1,0 +1,12 @@
+package test.model;
+
+import lombok.Data;
+
+@Data
+public class FilmStatus {
+	private int totalByte;
+
+	public void increaTotalByte() {
+		totalByte++;
+	}
+}

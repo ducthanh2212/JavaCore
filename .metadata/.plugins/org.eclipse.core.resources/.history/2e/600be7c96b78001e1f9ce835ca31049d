@@ -1,0 +1,20 @@
+package concurrencyAndMultiThread;
+
+import java.util.concurrent.locks.Lock;
+
+import lombok.Data;
+
+@Data
+public class DownloadStatus {
+	private int totalByte;
+	private Lock lock;
+	public void increaTotalByte() {
+		lock.lock();
+		try {
+			totalByte++;
+			
+		} finally {
+			lock.unlock();
+		}
+	}
+}

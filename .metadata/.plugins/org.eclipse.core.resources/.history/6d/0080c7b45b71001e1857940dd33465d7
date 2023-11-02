@@ -1,0 +1,14 @@
+package genericsPackage;
+
+public class TestMain {
+	public static void main(String[] args) {
+		User peple = new People(1, "haha");
+		GenericList<User> lst = new GenericList<User>();
+		GenericList<People> lstHumnan = new GenericList<People>();
+		lst.add(peple);
+		People p = new People(1, "a");
+		lstHumnan.add(p);
+		Utils.print(lstHumnan);
+		
+	}
+}

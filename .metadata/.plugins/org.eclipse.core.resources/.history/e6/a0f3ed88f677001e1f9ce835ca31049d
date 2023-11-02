@@ -1,0 +1,8 @@
+package concurrencyAndMultiThread;
+
+public class ThreadTest {
+	public static void main(String[] args) {
+		System.err.println(Thread.activeCount());
+		System.err.println(Runtime.getRuntime().availableProcessors());
+	}
+}

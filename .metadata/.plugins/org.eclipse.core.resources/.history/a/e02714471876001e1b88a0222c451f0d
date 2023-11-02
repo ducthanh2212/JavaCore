@@ -1,0 +1,11 @@
+package functionalInterface;
+
+public class BinaryOperator {
+
+	// là 1 functional interface dùng để thực hiện các phép tính toán nhị phân và trả về kết quả cùng kiểu dữ liệu với kiểu dữ liệu đầu vào
+	public static void main(String[] args) {
+		java.util.function.BinaryOperator<T>
+
+	}
+
+}

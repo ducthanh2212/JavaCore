@@ -1,0 +1,62 @@
+package test;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class ThreadRanNum extends Thread{
+	@Autowired
+	private ShareData shareData;
+	
+	public ThreadRanNum(ShareData shareData) {
+		this.shareData = shareData;
+	}
+	
+	@Override
+	public void run() {
+		Random random = new Random();
+		for(int i =0;i<11;i++) {
+			int randNum = random.nextInt(100);
+			shareData.lstNum.add(randNum);
+		}
+	}
+	
+	abstract class shape{
+		abstract void run();
+		abstract void sing();
+		void hi() {
+			System.err.println("d");
+		}
+	}
+	
+	
+	
+	public static void main(String []agr) {
+		int []nums = {3,3,4};
+		int a = removeDup(nums);
+		System.err.println(a);
+	}
+	public static int removeDup(int []nums) {
+		Map<Integer,Integer> map = new HashMap<>();
+		for(int i = 0; i < nums.length; i ++) {
+			if(map.containsKey(nums[i])) {
+				map.put(nums[i], map.get(nums[i])+1);
+			}else {
+				map.put(nums[i], 1);
+			}
+		}
+		int max = 0;
+		int index = 0;
+		for(Integer it : map.keySet()) {
+			if(map.get(it) > max) {
+				max = map.get(it);
+				index = it;
+			}
+		}
+		System.err.println(map);
+		System.err.println(index);
+		return max;
+	}
+}

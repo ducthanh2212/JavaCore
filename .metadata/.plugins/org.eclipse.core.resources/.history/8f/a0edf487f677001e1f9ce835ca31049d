@@ -1,0 +1,17 @@
+package concurrencyAndMultiThread;
+
+import lombok.var;
+
+public class ThreadObject implements Runnable{
+
+	@Override
+	public void run() {
+		System.err.println("start thread");
+		for(var i =0; i < Integer.MAX_VALUE; i++) {
+			if(Thread.currentThread().isInterrupted()) return;
+			System.err.println("thread is doing: "+ Thread.currentThread().getName());
+		}
+		System.err.println("done thread");
+	}
+
+}

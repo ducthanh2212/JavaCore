@@ -1,0 +1,11 @@
+package genericsPackage;
+
+public class TestMain {
+	public static void main(String[] args) {
+		User peple = new People(1, "haha");
+		GenericList<People> lst = new GenericList<People>();
+		lst.add(peple);
+		Utils.print(lst);
+		
+	}
+}

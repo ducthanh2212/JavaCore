@@ -1,0 +1,12 @@
+package concurrencyAndMultiThread;
+
+import lombok.Data;
+
+@Data
+public class DownloadStatus {
+	private int totalByte;
+
+	public void increaTotalByte() {
+		totalByte++;
+	}
+}

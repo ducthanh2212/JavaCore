@@ -1,0 +1,10 @@
+package comperatorInterface;
+
+import java.util.Comparator;
+
+public class CompareByEmail implements Comparator<Customer>{
+
+	
+
+
+}

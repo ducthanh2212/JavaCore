@@ -1,0 +1,15 @@
+package comperatorInterface;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class TestMain {
+	public static void main(String[] args) {
+		List<Customer> lst = new ArrayList<Customer>();
+		lst.add(new Customer("a1","e1"));
+		lst.add(new Customer("a4","e4"));
+		lst.add(new Customer("a2","e2"));
+		Collections.sort(lst, new CompareByEmail());
+	}
+}

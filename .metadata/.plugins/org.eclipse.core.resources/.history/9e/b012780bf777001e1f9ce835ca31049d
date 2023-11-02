@@ -1,0 +1,32 @@
+package concurrencyAndMultiThread;
+
+public class ThreadTest {
+	/**
+	 * parallel: song song
+	 * interrupting: gián đoạn
+	 */
+	
+	
+	public static void main(String[] args) {
+		System.err.println(Thread.activeCount()); // xem những luồng nào đang hoạt động
+		System.err.println(Runtime.getRuntime().availableProcessors()); // xem máy đang trống bao nhiu luồng
+	}
+	
+	/**
+	 * Pausing a thread: để dừng thread ta dùng interrupt() để gửi message lên cho thread biết rằng nó cần phải gián đoạn
+	 */
+	
+	public static void interruptingThread() {
+		Thread thread = new Thread(new ThreadObject());
+		thread.start();
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		thread.interrupt(); // đánh dấu luồng cần phải gián đoạn 
+	}
+}

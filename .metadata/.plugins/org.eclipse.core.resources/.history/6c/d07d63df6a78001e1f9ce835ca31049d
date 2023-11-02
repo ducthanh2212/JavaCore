@@ -1,0 +1,27 @@
+package concurrencyAndMultiThread;
+
+import lombok.var;
+
+public class DownloadFileTask implements Runnable{
+
+	private DownloadStatus status;
+	
+	
+	public DownloadFileTask(DownloadStatus status) {
+		this.status = status;
+	}
+
+
+	@Override
+	public void run() {
+		System.err.println("start thread");
+		for(var i =0; i < 10_000; i++) {
+			if(Thread.currentThread().isInterrupted())// kiểm tra xem trạng thái của thread có bị gián đoạn không
+				return;
+			System.err.println("thread is doing: "+ Thread.currentThread().getName());
+			System.err.println(status.increaTotalByte());
+		}
+		System.err.println("done thread");
+	}
+
+}

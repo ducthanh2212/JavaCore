@@ -1,0 +1,9 @@
+package genericsPackage;
+
+public class People extends User<Integer, String>{
+
+
+	public People(int id, String name) {
+		super(id,name);
+	}
+}

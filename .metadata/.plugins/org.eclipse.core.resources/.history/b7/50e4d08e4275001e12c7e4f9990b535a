@@ -1,0 +1,8 @@
+package lambdaExpression;
+
+public class Main {
+	
+	public void main(String[] args) {
+		System.err.println("xin chao");
+	}
+}

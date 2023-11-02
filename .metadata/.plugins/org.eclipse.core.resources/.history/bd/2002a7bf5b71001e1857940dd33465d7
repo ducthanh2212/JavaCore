@@ -1,0 +1,36 @@
+package genericsPackage;
+
+import java.util.Iterator;
+
+public class GenericList <T> implements Iterator<T>{
+	private T[] items = extracted();
+
+	private T[] extracted() {
+		return (T[]) new Object[10];
+	}
+	private int count;
+	
+	public void add(T item) {
+		items[count++] = item;
+	}
+	
+	public T get(int count) {
+		return items[count];
+	}
+
+	@Override
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public T next() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}
+
+

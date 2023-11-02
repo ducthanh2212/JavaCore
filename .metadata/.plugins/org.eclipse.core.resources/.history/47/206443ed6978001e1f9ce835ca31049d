@@ -1,0 +1,5 @@
+package concurrencyAndMultiThread;
+
+public class DownloadFileStatus {
+
+}

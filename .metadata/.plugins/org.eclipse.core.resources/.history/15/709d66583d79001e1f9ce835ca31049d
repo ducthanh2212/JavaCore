@@ -1,0 +1,30 @@
+package executiveFramework;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutiveTest {
+	public static void main(String[] args) {
+		executors();
+	}
+	
+	public static void executors() {
+		ExecutorService ex = Executors.newFixedThreadPool(2);
+		try {
+			ex.submit(() ->{
+				for(int i = 0; i < 10 ; i++) {
+					System.err.println("A["+i+"]: "+Thread.currentThread().getName());
+				}
+			});
+			
+//			ex.submit(() ->{
+//				for(int i = 0; i < 10 ; i++) {
+//					System.err.println("B["+i+"]: "+Thread.currentThread().getName());
+//				}
+//			});
+//			
+		} catch (Exception e) {
+			ex.shutdown();
+		}
+	}
+}

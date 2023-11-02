@@ -1,0 +1,31 @@
+package concurrencyAndMultiThread;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import lombok.Data;
+
+@Data
+public class DownloadStatus {
+	private int totalByte;
+	private volatile boolean isDone;
+	
+	// dùng lock để khóa thread
+	private Lock lock = new ReentrantLock();
+	public void increaTotalByte() {
+		lock.lock();
+		try {
+			totalByte++;
+			
+		} finally {
+			lock.unlock();
+		}
+	}
+	
+	public boolean getIsDone() {
+		return isDone;
+	}
+	public void setIsDone() {
+		this.isDone = true;
+	}
+}

@@ -1,0 +1,145 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class LeetCode {
+	public static void main(String[] arg) {
+//		System.err.println(strStr("leetcode", "leeto"));
+//		System.err.println(isSubsequence("bba", "abb"));
+//		System.err.println(isIsomorphic("babc", "babc"));
+//		Set<String> lstt = new HashSet<>();
+		
+//		List<String> listLanguages  = new ArrayList<>();
+//		listLanguages.add("Java");
+//        listLanguages.add("Python");
+//        listLanguages.add("PHP");
+//        listLanguages.add(".NET");
+//        listLanguages.add("C");
+//        listLanguages.add("C++");
+//        ListIterator<String> litr = listLanguages.listIterator();
+//        try {
+//			
+//        	while(litr.hasNext()) {
+//        		String t = String.valueOf(litr.next());
+//        		litr.set(t+"thanh");
+//        		
+//        	}
+//        	System.err.println(listLanguages);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		List<String> lst = new ArrayList<String>();
+		lst.add(null);
+		Set<String> set = new TreeSet<String>();
+		set.add(null);
+		System.err.println(lst);
+		System.err.println(set);
+	}
+
+	public static int strStr(String haystack, String needle) {
+		int i = 0;
+		int t = 0;
+		int j = 0;
+		char[] cHayStk = haystack.toCharArray();
+		char[] cNeed = needle.toCharArray();
+		boolean check = true;
+		int index = -1;
+		boolean checkT = false;
+		boolean isSet = false;
+		while (check) {
+			i = Math.min(i, cHayStk.length - 1);
+			j = Math.min(j, cNeed.length - 1);
+			t = Math.min(t, cHayStk.length - 1);
+
+			if (cHayStk[i] == cNeed[0] && !checkT) {
+				t = i;
+			}
+			if (cNeed[j] == cHayStk[i] && !checkT) {
+				if (index == -1) {
+					index = i;
+				}
+				if (j == cNeed.length - 1) {
+					return index;
+				}
+				j++;
+
+			} else if (t > 0) {
+				if (!isSet) {
+					j = 0;
+					index = -1;
+				}
+				if (cHayStk[t] == cNeed[j]) {
+					checkT = true;
+					isSet = true;
+					if (index == -1) {
+						index = t;
+					}
+					if (j == cNeed.length - 1) {
+						return index;
+					}
+					j++;
+					t++;
+				}
+			}
+			i++;
+			if (j > cNeed.length - 1) {
+				return -1;
+			}
+		}
+
+		return -1;
+
+	}
+
+	public static boolean isSubsequence(String ransomNote, String magazine) {
+		int i = 0, j = 0;
+		char[] arrransom = ransomNote.toCharArray();
+		Arrays.sort(arrransom);
+		char[] arrmaga = magazine.toCharArray();
+		Arrays.sort(arrmaga);
+		while (i < ransomNote.length() && j < magazine.length()) {
+			if (arrransom[i] == arrmaga[j++]) {
+				i++;
+			}
+		}
+		return i == ransomNote.length();
+	}
+
+	public static boolean isIsomorphic(String s, String t) {
+		int checkS = 0;
+		int checkT = 0;
+		if (s.length() != t.length())
+			return false;
+		int i = 0, j = 0;
+		while (i < s.length() && j < s.length()) {
+			if(i != j) {
+				if (s.charAt(i) == s.charAt(j)) {
+					checkS = i + j + 1;
+				}
+				if (t.charAt(i) == t.charAt(j)) {
+					checkT = i + j + 1;
+				}	
+			}
+			if( j == s.length() - 1) {
+				i ++ ;
+				j = 0;
+			}
+			j++;
+
+		}
+		if (checkS == checkT) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+}

@@ -1,0 +1,12 @@
+package test.model;
+
+public class Film extends Movie{
+
+	private Gener gener;
+	
+	public Film(String title, int like) {
+		super(title, like);
+		// TODO Auto-generated constructor stub
+	}
+
+}

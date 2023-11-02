@@ -1,0 +1,9 @@
+package genericsPackage;
+
+public class Utils {
+
+	public static void print(GenericList<? extends User<Object, Object>> lst) {
+		System.err.println(lst.get(0));
+	}
+	
+}

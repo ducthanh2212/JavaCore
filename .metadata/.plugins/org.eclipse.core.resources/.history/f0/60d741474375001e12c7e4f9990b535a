@@ -1,0 +1,16 @@
+package lambdaExpression;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+	}
+	
+	public static void doing() {
+		print(messeage -> );
+	}
+	
+	public static void print(Printer printer) {
+		printer.print("this is me");
+	}
+}

@@ -1,0 +1,10 @@
+package functionalInterface;
+
+public class UnaryOPerator {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,24 @@
+package genericsPackage;
+
+import lombok.var;
+
+public class TestMain {
+	public static void main(String[] args) {
+		User peple = new People(1, "haha");
+		GenericList<User> lst = new GenericList<User>();
+		GenericList<People> lstHumnan = new GenericList<People>();
+		lst.add(peple);
+		People p = new People(1, "a");
+		lstHumnan.add(p);
+		Utils.print(lstHumnan);
+		
+		// đối với trường hợp mà đối tượng có thuộc tính là danh sách mà muốn truy cập sử dụng được thì phải get danh sách đó ra theo phương thức get
+		// nhưng khi chúng ta muốn thay đổi
+		var list = new GenericList<String>();
+		list.add("a");
+		list.add("b");
+		for(var item : list) {
+			
+		}
+	}
+}

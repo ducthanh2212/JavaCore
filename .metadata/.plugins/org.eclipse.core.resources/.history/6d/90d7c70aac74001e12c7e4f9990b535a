@@ -1,0 +1,11 @@
+package comperatorInterface;
+
+public class CompareByEmail implements Comparable<Customer>{
+
+	@Override
+	public int compareTo(Customer o1) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

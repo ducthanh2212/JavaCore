@@ -1,0 +1,23 @@
+package functionalInterface;
+
+import java.util.function.Consumer;
+
+public class ConsumerInterface {
+	public static void main(String[] args) {
+		
+		
+		// cach 1: đây là cách viết bình thường khi dùng anonymous trong 1 class, khi tạo mới đối tượng consumer thì nó bắt override lại phương thức accept
+		Consumer<String> consumer = new Consumer<String>() {
+			
+			@Override
+			public void accept(String t) {
+				System.err.println(t);
+				
+			}
+		};
+		// cach 2: đây là cách viết của lambda expression "(input) -> System.err.println(input + "java");" -> khúc này chính là khúc override lại ở phía trên
+		Consumer<String> consumer1 = (input) -> System.err.println(input + "java");
+		Consumer<String> consumer2 = (input) -> System.err.println(input + "word");
+		consumer1.andThen(consumer2).accept("hello");
+	}
+}

@@ -1,0 +1,8 @@
+package comperatorInterface;
+
+public class CompareByEmail implements Comparable<Customer>{
+
+	
+
+
+}

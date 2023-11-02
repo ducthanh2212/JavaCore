@@ -1,0 +1,19 @@
+package test.model;
+
+import lombok.Data;
+
+@Data
+public class Movie {
+	private int like;
+	private String title;
+
+	public Movie(String title, int like) {
+		this.title = title;
+		this.like = like;
+	}
+
+	@Override
+	public String toString() {
+		return " {title: " + this.title + " ," + "like:" + this.like;
+	}
+}

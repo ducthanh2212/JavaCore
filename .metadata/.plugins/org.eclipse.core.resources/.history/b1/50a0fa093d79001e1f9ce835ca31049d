@@ -1,0 +1,24 @@
+package executiveFramework;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutiveTest {
+	public static void main(String[] args) {
+
+	}
+	
+	public static void executors() {
+		ExecutorService ex = Executors.newFixedThreadPool(2);
+		try {
+			ex.submit(() ->{
+				for(int i = 0; i < 10 ; i++) {
+					System.err.println(Thread.currentThread().getName());
+				}
+			});
+			
+		} catch (Exception e) {
+			ex.shutdown();
+		}
+	}
+}

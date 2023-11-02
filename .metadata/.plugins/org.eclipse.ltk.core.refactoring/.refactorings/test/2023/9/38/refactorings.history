@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Extract local variable &apos;value22&apos; from expression &apos;value2&apos;&#x0D;&#x0A;- Original project: &apos;test&apos;&#x0D;&#x0A;- Variable name: &apos;value22&apos;&#x0D;&#x0A;- Destination method: &apos;test.leetCode.Practice.compare(...)&apos;&#x0D;&#x0A;- Variable expression: &apos;value2&apos;&#x0D;&#x0A;- Replace occurrences of expression with variable" description="Extract local variable &apos;value22&apos;" final="false" id="org.eclipse.jdt.ui.extract.temp" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;test.leetCode{Practice.java" name="value22" replace="true" selection="2134 6" stamp="1694916477445" varType="false" version="1.0"/>
+</session>

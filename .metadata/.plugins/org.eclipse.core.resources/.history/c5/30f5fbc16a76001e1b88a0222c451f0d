@@ -1,0 +1,14 @@
+package stream;
+
+import lombok.Data;
+
+@Data
+public class Movie {
+	private int like;
+	private String title;
+	
+	public Movie(String title, int like) {
+		this.title = title;
+		this.like = like;
+	}
+}

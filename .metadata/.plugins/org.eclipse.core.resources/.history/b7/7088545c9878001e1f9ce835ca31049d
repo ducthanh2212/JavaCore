@@ -1,0 +1,39 @@
+package concurrencyAndMultiThread;
+
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import lombok.Data;
+
+@Data
+public class DownloadStatus {
+	private int totalByte;
+	private volatile boolean isDone;
+	/**
+	 * ngoài cách dùng lock để khóa thread và cập nhật giá trị thì ta có thẻ  dùng Atomic để thay thế 
+	 */
+	private AtomicInteger totalByte2 = new AtomicInteger();
+	public void increateTotalByte2() {
+		this.totalByte2.incrementAndGet();// ++ totalByte2;
+//		this.totalByte2.getAndIncrement(); // totalByte2 ++;
+	}
+	// dùng lock để khóa thread
+	private Lock lock = new ReentrantLock();
+	public void increaTotalByte() {
+		lock.lock();
+		try {
+			totalByte++;
+			
+		} finally {
+			lock.unlock();
+		}
+	}
+	
+	public boolean getIsDone() {
+		return isDone;
+	}
+	public void setIsDone() {
+		this.isDone = true;
+	}
+}

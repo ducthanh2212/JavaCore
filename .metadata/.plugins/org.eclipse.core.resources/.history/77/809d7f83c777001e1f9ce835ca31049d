@@ -1,0 +1,20 @@
+package stream;
+
+import lombok.Data;
+import test.model.Gener;
+
+@Data
+public class Movie {
+	private int like;
+	private String title;
+	private Gener gener;
+	
+
+	public Movie(int like, String title, Gener gener) {
+		this.like = like;
+		this.title = title;
+		this.gener = gener;
+	}
+
+
+}

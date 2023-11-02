@@ -1,0 +1,151 @@
+package stream;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
+
+import lombok.var;
+
+public class StreamTest {
+
+	public static void main(String[] args) {
+//		createStream();
+//		mapStream();
+//		sliceStream();
+//		sortStream();
+//		peekingElm();
+		reducer();
+	}
+	
+	//1. Create Stream
+	public static void createStream() {
+		// đầu vào của generate là supplier interface (phương thức trừa tượng không có input nhưng có phương thức get trả về kết quả)
+		Stream.generate(() -> Math.random())
+						.limit(3)
+						.forEach(n -> System.err.println(n));
+		// đầu vào iterate (tham số truyền vào n, tham số thứ 2 là unary operator (toán tử nhị phân đã học ở functionInterface)
+		Stream.iterate(2, n -> n + 2)
+				.limit(10)
+				.forEach(n->System.err.println(n));
+	}
+	
+	//2. Map Stream
+	public static void mapStream() {
+		// flatMap dùng để add nhiều mảng thành 1
+		Stream.of(List.of(1,2,3), List.of("a","b",1))
+			.flatMap(list -> list.stream())
+			.forEach(n -> System.err.println(n));
+		List<String> lst1 = new ArrayList<String>();
+		Collections.addAll(lst1, "a","b","c");
+		List<String> lst2 = new ArrayList<String>();
+		Collections.addAll(lst1, "a1","b1","c1");
+		
+		var lst = Stream.of(List.of(1,2,3), List.of("a","b",1))
+				.flatMap(list -> list.stream())
+				.toList();
+		
+			System.err.println(lst);	
+	}
+	
+	//3. slice stream: là 1 phần của stream thực hiện các công việc lọc dữ liệu theo điều kiện cung cấp các phương thức sau:
+	// limit
+	// skip
+	// filter
+	// takeWhile (java 9)
+	// dropwhile (java 9)
+	// => sự khác biệt giữa takeWhile và filter là: filter sẽ lọc dữ liệu từ đầu mảng tới cuối mảng, còn takeWhile chạy qua từng phần tử nếu gặp điều kiện không thỏa nó sẽ dừng lại liền
+	
+	public static void sliceStream() {
+		List<Movie> lst = List.of(
+				new Movie("a",10),
+				new Movie("b",30),
+				new Movie("c",40),
+				new Movie("d",20)
+				);
+		lst.stream()
+		   .filter(m -> m.getLike() < 30)
+		   .map(m -> m.getTitle())
+		   .forEach(m -> System.err.println("filter: "+ m));
+		System.err.println("==================================================================");
+		// khi gặp phần tử đầu tiên không thỏa đk là vòng lặp dừng lại liền
+		lst.stream()
+			.takeWhile(m -> m.getLike()  <= 30)
+			.forEach(m -> System.err.println("takeWhile: "+m));
+		// dropWhile thì lặp lại với takeWhile nó sẽ loại bỏ các phần tử thỏa điều kiện, không thỏa nó sẽ dừng lại liền
+		System.err.println("==================================================================");
+		lst.stream()
+			.dropWhile(m -> m.getLike() < 20)
+			.forEach(m -> System.err.println("dropWhile: "+m));
+	}
+	
+	//4. Sort stream
+	public static void sortStream() {
+		List<Movie> lst = List.of(
+				new Movie("a",10),
+				new Movie("b",30),
+				new Movie("c",40),
+				new Movie("d",20)
+				);
+		
+		lst.stream()
+//			.sorted() // nếu muốn dùng mỗi phương thức sort thì ở class movie phải implement lại comperable<movie> để override lại phương thức compare mặc đinh
+		// hoặc không muốn implement lại comperable thì dùng biểu thức như bên dưới biểu thức lambda expression và reversed dùng để sắp xếp thứ tự giảm dần ( mặc đinh là sắp xếp tăng dần)
+		.sorted(Comparator.comparing(m -> ((Movie) m).getTitle()).reversed())
+			.forEach(m -> System.err.println(m.getTitle()));
+	}
+	
+	//5 peeking element
+	public static void peekingElm() {
+		List<Movie> lst = List.of(
+				new Movie("a",10),
+				new Movie("b",30),
+				new Movie("c",40),
+				new Movie("d",20)
+				);
+		// peek thường dùng để kiểm tra dữ liệu, lấy dữ liệu ra xem mà ko làm ảnh hưởng đến giá trị trong mảng
+		// ví dụ ở dưới là trong peek dù + 10 cho từng phần tử nhưng tới forEach thì giá trị vẫn ko đổi
+		lst.stream()
+		.peek(m -> System.err.println(m.getLike() + 10))
+			.forEach(m -> System.err.println(m.getLike()));
+	}
+	
+	
+//======================== REDUCER (CÁC BIẾN ĐỔI DỮ LIỆU) ===================================
+//	count()
+//	anyMatch(predicate)
+//	allMatch(predicate)
+//	noneMatch(predicate)
+//	findFirst()
+//	findAny()
+//	max(comparator)
+//	min(comparator)
+	
+	public static void reducer() {
+		List<Movie> lst = List.of(
+				new Movie("a",10),
+				new Movie("b",30),
+				new Movie("c",40),
+				new Movie("d",20)
+				);
+		var movie = lst.stream()
+			.filter(m -> m.getLike() > 20)
+			.findAny();
+		
+		var movie2 = lst.stream()
+						.max(Comparator.comparing(m -> ((Movie)m).getTitle()));// cách 1
+		var movie3 = lst.stream()
+						.min(Comparator.comparing(Movie::getTitle));// cách 2 dùng method reference
+		
+		
+		var sum = lst.stream()
+					.map(m -> m.getLike())
+					.reduce((a,b) -> a + b); // cộng tổng các giá trị phần tử có trong mảng
+		System.err.println(sum.orElse(0)); // nếu không có giá trị thì gán giá trị mặc định là 0
+		System.err.println(movie.get().getTitle());
+	}
+}

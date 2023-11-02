@@ -1,0 +1,6 @@
+package stream;
+
+public class Movie {
+	private int likes;
+	private String title;
+}

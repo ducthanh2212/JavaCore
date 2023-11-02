@@ -1,0 +1,12 @@
+package test.model;
+
+public class Film extends Movie{
+
+	private Gener gener;
+	
+	public Film(String title, int like, Gener gener) {
+		super(title, like);
+		this.gener = gener;
+	}
+
+}

@@ -1,0 +1,19 @@
+package functionalInterface;
+
+import java.util.function.BinaryOperator;
+
+public class BinaryOperators {
+
+	// là 1 functional interface dùng để thực hiện các phép tính toán nhị phân và trả về kết quả cùng kiểu dữ liệu với kiểu dữ liệu đầu vào
+	public static void main(String[] args) {
+		BinaryOperator<Integer> binaryOperator = new BinaryOperator<Integer>() {
+			
+			@Override
+			public Double apply(Double t, Integer u) {
+				// TODO Auto-generated method stub
+				return t+u;
+			}
+		};
+	}
+
+}

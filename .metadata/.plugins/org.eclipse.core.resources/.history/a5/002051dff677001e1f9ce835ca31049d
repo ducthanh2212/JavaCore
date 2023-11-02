@@ -1,0 +1,20 @@
+package concurrencyAndMultiThread;
+
+public class ThreadTest {
+	/**
+	 * parallel: song song
+	 * interrupting: gián đoạn
+	 */
+	
+	
+	public static void main(String[] args) {
+		System.err.println(Thread.activeCount());
+		System.err.println(Runtime.getRuntime().availableProcessors());
+	}
+	
+	/**
+	 * Pausing a thread: để dừng thread ta dùng interrupt() để gửi message lên cho thread biết rằng nó cần phải gián đoạn
+	 */
+	
+	
+}

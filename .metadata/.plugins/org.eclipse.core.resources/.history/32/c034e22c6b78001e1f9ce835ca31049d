@@ -1,0 +1,64 @@
+package concurrencyAndMultiThread;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import lombok.var;
+
+public class ThreadTest {
+	/**
+	 * parallel: song song
+	 * interrupting: gián đoạn
+	 */
+	
+	
+	public static void main(String[] args) {
+//		System.err.println(Thread.activeCount()); // xem những luồng nào đang hoạt động
+//		System.err.println(Runtime.getRuntime().availableProcessors()); // xem máy đang trống bao nhiu luồng
+		joinMultiThrad();
+		
+	}
+	
+	/**
+	 * Pausing a thread: để dừng thread ta dùng interrupt() để gửi message lên cho thread biết rằng nó cần phải gián đoạn
+	 * flow của đoạn code dưới như sau:
+	 * + sau khi tạo luồng nó sẽ chạy method run và in theo vòng lặp đã khai báo, sau đó luồng chính vẫn chạy tiếp tới dòng sleep(1000) thì đánh dấu là luồng cần gián đoạn và bên kia (ThreadObject) nhận được tín hiệu sẽ dừng lại 
+	 */
+	
+	public static void interruptingThread() {
+		Thread thread = new Thread(new DownloadFileTask(new DownloadStatus()));
+		thread.start();
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		thread.interrupt(); // đánh dấu luồng cần phải gián đoạn 
+	}
+	
+	/**
+	 * Cách tạo ra nhiều luồng chạy song song và đợi join các luồng lại 
+	 * + Tạo ra 1 list<thread> sau đó add hết vào list rồi chạy vòng lặp trên mảng này và join từ phần tử thread lại, nó sẽ đợi nhau hoàn thành
+	 */
+	public static void joinMultiThrad() {
+		List<Thread> lst = new ArrayList<>();
+		for(int i = 0; i < 10; i++) {
+			Thread thread = new Thread(new DownloadFileTask(new DownloadStatus()));
+			thread.start();
+			lst.add(thread);
+		}
+		
+		for(var th : lst) {
+			try {
+				th.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+}
